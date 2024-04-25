@@ -61,7 +61,6 @@ public class TRSSample : MonoBehaviour {
     }
 
     #region ProcessInput
-
     void ApplyCheckUI(float dt) {
         if (btn_T_R.IsPressing) {
             inputEntity.input_moveAxis = inputEntity.UI_CalAxis(inputEntity.input_moveAxis, Vector3.right, dt, moveSpeed);
@@ -109,8 +108,6 @@ public class TRSSample : MonoBehaviour {
             ApplyParentReset();
         }
     }
-
-
     #endregion
 
     #region ApplyTRS
