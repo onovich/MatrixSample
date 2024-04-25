@@ -9,18 +9,14 @@ public class TRSSample : MonoBehaviour {
     [SerializeField] float rotateSpeed = 1f;
     [SerializeField] float scaleSpeed = 1f;
 
-    private Vector3 initialRelativePosition;
-    private Quaternion initialRelativeRotation;
-    private Vector3 initialRelativeScale;
+    TRSModel originTRS;
 
     void Awake() {
-        initialRelativePosition = parentObject.InverseTransformPoint(childObject.position);
-        initialRelativeRotation = Quaternion.Inverse(parentObject.rotation) * childObject.rotation;
-        initialRelativeScale = new Vector3(
-            childObject.localScale.x / parentObject.localScale.x,
-            childObject.localScale.y / parentObject.localScale.y,
-            childObject.localScale.z / parentObject.localScale.z
-        );
+        originTRS = new TRSModel {
+            t = parentObject.InverseTransformPoint(childObject.position),
+            r = Quaternion.Inverse(parentObject.rotation) * childObject.rotation,
+            s = childObject.localScale.ElementwiseDivide(parentObject.localScale)
+        };
     }
 
     void Update() {
@@ -64,22 +60,16 @@ public class TRSSample : MonoBehaviour {
             ParentScale(scaleAxis);
         }
 
-        ApplyTRS(parentObject.position, parentObject.rotation, parentObject.localScale);
-    }
+        TRSModel parntTRS = new TRSModel {
+            t = parentObject.position,
+            r = parentObject.rotation,
+            s = parentObject.localScale
+        };
 
-    void ApplyTRS(Vector3 t, Quaternion r, Vector3 s) {
-        Matrix4x4 m = Matrix4x4.identity;
-        m.SetTRS(t, r, s);
-        // T
-        childObject.position = m.MultiplyPoint(initialRelativePosition);
-        // R
-        childObject.rotation = r * initialRelativeRotation;
-        // S
-        childObject.localScale = new Vector3(
-            s.x * initialRelativeScale.x,
-            s.y * initialRelativeScale.y,
-            s.z * initialRelativeScale.z
-        );
+        TRSModel childTRS = MatrixUtil.ApplyTRS(parntTRS, originTRS);
+        childObject.position = childTRS.t;
+        childObject.rotation = childTRS.r;
+        childObject.localScale = childTRS.s;
     }
 
     Vector3 CalScaleAxis(Vector3 axis, Vector3 dir, float dt, float speed) {

@@ -202,8 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentObject: {fileID: 7378985437696132492}
   childObject: {fileID: 1647648545}
-  moveSpeed: 1
-  rotateSpeed: 10
+  moveSpeed: 10
+  rotateSpeed: 100
   scaleSpeed: 1
 --- !u!1 &594607194
 GameObject:
@@ -626,7 +626,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0dce0c266f494fbd9a318dc0fd60878, type: 2}
+  - {fileID: 2100000, guid: bd37bf747cca943d4815e7f58be53fc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
