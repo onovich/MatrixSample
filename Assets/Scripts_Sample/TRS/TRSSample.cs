@@ -30,7 +30,7 @@ public class TRSSample : MonoBehaviour {
     [SerializeField] PressableElement btn_Reset;
     #endregion
 
-    TRSModel relativeTRS;
+    TRSModel offsetTRS;
     TRSModel originTRS;
     TRSInputEntity inputEntity;
 
@@ -38,7 +38,7 @@ public class TRSSample : MonoBehaviour {
         inputEntity = new TRSInputEntity();
         inputEntity.Reset();
 
-        relativeTRS = new TRSModel {
+        offsetTRS = new TRSModel {
             t = parentObject.InverseTransformPoint(childObject.position),
             r = Quaternion.Inverse(parentObject.rotation) * childObject.rotation,
             s = childObject.localScale.ElementwiseDivide(parentObject.localScale)
@@ -129,7 +129,7 @@ public class TRSSample : MonoBehaviour {
             r = parentObject.rotation,
             s = parentObject.localScale
         };
-        TRSModel childTRS = MatrixUtil.ApplyChildTRS(in parntTRS, in relativeTRS);
+        TRSModel childTRS = MatrixUtil.ApplyTRSWithOffset(in parntTRS, in offsetTRS);
         childObject.position = childTRS.t;
         childObject.rotation = childTRS.r;
         childObject.localScale = childTRS.s;

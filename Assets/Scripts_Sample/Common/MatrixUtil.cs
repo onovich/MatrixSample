@@ -3,7 +3,7 @@ using UnityEngine;
 public static class MatrixUtil {
 
     // TRS
-    public static TRSModel ApplyChildTRS(in TRSModel src, in TRSModel offset) {
+    public static TRSModel ApplyTRSWithOffset(in TRSModel src, in TRSModel offset) {
         Matrix4x4 m = Matrix4x4.identity;
         m.SetTRS(src.t, src.r, src.s);
         TRSModel dst = new TRSModel();
