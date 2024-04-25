@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sample : MonoBehaviour {
+public class MVPSample : MonoBehaviour {
 
     [SerializeField] GameObject objectPrefab;
     [SerializeField] GameObject panelPrefab;

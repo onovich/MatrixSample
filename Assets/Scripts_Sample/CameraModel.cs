@@ -25,6 +25,7 @@ public class CameraModel {
         Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Rotation);
         Vector3 inversePosition = -Position;
         Matrix4x4 translationMatrix = Matrix4x4.Translate(inversePosition);
-        return rotationMatrix * translationMatrix; // 注意矩阵乘法的顺序，先旋转后平移
+        return rotationMatrix * translationMatrix;
     }
+
 }
