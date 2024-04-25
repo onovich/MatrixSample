@@ -22,10 +22,13 @@ public class CameraModel {
     }
 
     public Matrix4x4 GetViewMatrix() {
-        Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Rotation);
-        Vector3 inversePosition = -Position;
-        Matrix4x4 translationMatrix = Matrix4x4.Translate(inversePosition);
-        return rotationMatrix * translationMatrix;
+        var m = Matrix4x4.TRS(Position, Rotation, Vector3.one);
+        m = Matrix4x4.Inverse(m);
+        // m.m20 *= -1f;
+        // m.m21 *= -1f;
+        // m.m22 *= -1f;
+        // m.m23 *= -1f;
+        return m;
     }
 
 }

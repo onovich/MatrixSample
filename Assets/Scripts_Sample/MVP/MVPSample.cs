@@ -14,6 +14,7 @@ public class MVPSample : MonoBehaviour {
     List<GameObject> panels;
 
     void Awake() {
+        mainCamera.depthTextureMode |= DepthTextureMode.Depth;
         objects = new List<GameObject>();
         panels = new List<GameObject>();
         cameraModel = new CameraModel(
@@ -31,10 +32,9 @@ public class MVPSample : MonoBehaviour {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << groundLayer)) {
-                var depth = hit.distance;
-                Vector3 worldPos = CameraMathUtil.ScreenToWorldPos(cameraModel, Input.mousePosition, depth);
+                Vector3 worldPos = MatrixUtil.ScreenToWorldPoint(cameraModel, Input.mousePosition, new Vector2(Screen.width, Screen.height));
                 var _worldPos = hit.point;
-                GameObject obj = Instantiate(objectPrefab, worldPos, Quaternion.identity);
+                GameObject obj = Instantiate(objectPrefab, _worldPos, Quaternion.identity);
                 GameObject panel = Instantiate(panelPrefab, Vector2.zero, Quaternion.identity, canvas.transform);
                 objects.Add(obj);
                 panels.Add(panel);
@@ -44,19 +44,12 @@ public class MVPSample : MonoBehaviour {
         for (int i = 0; i < panels.Count; i++) {
             var panel = panels[i];
             var worldPos = objects[i].transform.position;
-            Vector2 screenPos = CameraMathUtil.WorldToScreenPos(cameraModel, worldPos);
-            var _screenPos = mainCamera.WorldToScreenPoint(worldPos);
+            Vector2 screenPos = MatrixUtil.WorldToScreenPoint(cameraModel, worldPos, new Vector2(Screen.width, Screen.height));
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvas.GetComponent<RectTransform>(), screenPos, null, out var canvasPos);
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.GetComponent<RectTransform>(), _screenPos, null, out var _canvasPos);
-
             panel.transform.localPosition = canvasPos;
-            // panel.transform.localPosition = _canvasPos;
-
-            // Debug.Log($"WorldPos: {worldPos}, ScreenPos: {screenPos} - _{_screenPos}, CanvasPos: {canvasPos} - {_canvasPos}");
         }
     }
 
