@@ -66,7 +66,7 @@ public class TRSSample : MonoBehaviour {
             s = parentObject.localScale
         };
 
-        TRSModel childTRS = MatrixUtil.ApplyTRS(parntTRS, originTRS);
+        TRSModel childTRS = MatrixUtil.ApplyTRS(in parntTRS, in originTRS);
         childObject.position = childTRS.t;
         childObject.rotation = childTRS.r;
         childObject.localScale = childTRS.s;
