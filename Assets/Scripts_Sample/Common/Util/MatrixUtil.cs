@@ -72,21 +72,22 @@ public static class MatrixUtil {
 
     public static Vector3 ScreenToWorldPoint(CameraModel camera, Vector3 screenPoint, Vector2 screenSize) {
 
+        Debug.Log("Screen To World:" + " screenPoint = " + screenPoint);
         // Screen -> ViewPort
         Vector3 viewportPoint = new Vector3(screenPoint.x / screenSize.x, screenPoint.y / screenSize.y, screenPoint.z);
         Debug.Log("Screen To World:" + " viewportPoint = " + viewportPoint);
 
         // ViewPort -> NDC
         Vector3 ndcPoint = new Vector3(
-            2.0f * viewportPoint.x - 1.0f,
-            2.0f * viewportPoint.y - 1.0f,
-            screenPoint.z
+           1 - 2.0f * viewportPoint.x,
+           1 - 2.0f * viewportPoint.y,
+           1
         );
         Debug.Log("Screen To World:" + " ndcPoint = " + ndcPoint);
 
         // NDC -> Projection
         Matrix4x4 projectionMatrix = camera.GetProjectionMatrix();
-        Vector4 clipSpacePoint = projectionMatrix.inverse * new Vector4(ndcPoint.x, ndcPoint.y, -ndcPoint.z, 1);
+        Vector4 clipSpacePoint = new Vector4(ndcPoint.x, ndcPoint.y, ndcPoint.z, 1.0f);
         Debug.Log("Screen To World:" + " clipSpacePoint = " + clipSpacePoint);
 
         // Projection -> View
@@ -94,9 +95,9 @@ public static class MatrixUtil {
         Debug.Log("Screen To World:" + " cameraSpacePoint = " + cameraSpacePoint);
 
         // View -> World
-        Vector3 worldSpacePoint = Quaternion.Inverse(camera.Rotation) * cameraSpacePoint;
-        // Matrix4x4 viewMatrix = camera.GetViewMatrix();
-        // Vector3 worldSpacePoint = viewMatrix.inverse * cameraSpacePoint;
+        // Vector3 worldSpacePoint = Quaternion.Inverse(camera.Rotation) * cameraSpacePoint;
+        Matrix4x4 viewMatrix = camera.GetViewMatrix();
+        Vector3 worldSpacePoint = viewMatrix.inverse * new Vector4(cameraSpacePoint.x, cameraSpacePoint.y, cameraSpacePoint.z, 1);
 
         Debug.Log("Screen To World:" + " worldSpacePoint = " + worldSpacePoint);
 
