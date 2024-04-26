@@ -35,25 +35,31 @@ public class MVPSample : MonoBehaviour {
                 Vector3 screenPos = Input.mousePosition;
                 float z = Vector3.Dot(hit.point - Camera.main.transform.position, Camera.main.transform.forward);
                 screenPos.z = z;
-                // Vector3 worldPos = MatrixUtil.ScreenToWorldPoint(cameraModel, screenPos, new Vector2(Screen.width, Screen.height));
-                var worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-                GameObject obj = Instantiate(objectPrefab, worldPos, Quaternion.identity);
-                GameObject panel = Instantiate(panelPrefab, Vector2.zero, Quaternion.identity, canvas.transform);
-                objects.Add(obj);
-                panels.Add(panel);
+
+                Vector3 _worldPos = TestScreenToWorldPoint(screenPos);
+                Vector3 worldPos = hit.point;
+                TestWorldToScreenPoint(worldPos);
             }
         }
 
-        for (int i = 0; i < panels.Count; i++) {
-            var panel = panels[i];
-            var worldPos = objects[i].transform.position;
-            Vector2 screenPos = MatrixUtil.WorldToScreenPoint(cameraModel, worldPos, new Vector2(Screen.width, Screen.height));
+    }
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.GetComponent<RectTransform>(), screenPos, null, out var canvasPos);
+    Vector3 TestScreenToWorldPoint(Vector3 screenPos) {
+        Vector3 worldPos = MatrixUtil.ScreenToWorldPoint(cameraModel, screenPos, new Vector2(Screen.width, Screen.height));
+        // var worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        GameObject obj = Instantiate(objectPrefab, worldPos, Quaternion.identity);
+        objects.Add(obj);
+        return worldPos;
+    }
 
-            panel.transform.localPosition = canvasPos;
-        }
+    void TestWorldToScreenPoint(Vector3 worldPos) {
+        GameObject panel = Instantiate(panelPrefab, Vector2.zero, Quaternion.identity, canvas.transform);
+        Vector2 screenPos = MatrixUtil.WorldToScreenPoint(cameraModel, worldPos, new Vector2(Screen.width, Screen.height));
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.GetComponent<RectTransform>(), screenPos, null, out var canvasPos);
+
+        panel.transform.localPosition = canvasPos;
+        panels.Add(panel);
     }
 
     void OnDestroy() {
