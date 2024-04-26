@@ -327,7 +327,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R_Yaw_Down
+  m_Text: R_Yaw_Right
 --- !u!222 &101208394
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1746,12 +1746,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2004265846}
-  - {fileID: 1302435263}
   - {fileID: 261912756}
   - {fileID: 1122424501}
   - {fileID: 1279562639}
   - {fileID: 344737163}
+  - {fileID: 1302435263}
+  - {fileID: 2004265846}
   m_Father: {fileID: 1811291433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2424,7 +2424,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R_Yaw_Up
+  m_Text: R_Yaw_Left
 --- !u!222 &1026028261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2637,7 +2637,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R_Yaw_Left
+  m_Text: R_Pitch_Down
 --- !u!222 &1159324878
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2716,7 +2716,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R__Roll_Back
+  m_Text: R__Roll_Right
 --- !u!222 &1189901708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3764,7 +3764,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R_Roll_Forward
+  m_Text: R_Roll_Left
 --- !u!222 &1760892659
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3843,7 +3843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R_Yaw_Right
+  m_Text: R_Pitch_Up
 --- !u!222 &1768639198
 CanvasRenderer:
   m_ObjectHideFlags: 0
