@@ -6,4 +6,10 @@ public struct TRSModel {
     public Quaternion r;
     public Vector3 s;
 
+    public TRSModel(Vector3 t, Quaternion r, Vector3 s) {
+        this.t = t;
+        this.r = r;
+        this.s = s;
+    }
+
 }
