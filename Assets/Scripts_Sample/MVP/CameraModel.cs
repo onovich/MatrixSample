@@ -31,4 +31,14 @@ public class CameraModel {
         return m;
     }
 
+    public Matrix4x4 GetViewMatrix2() {
+        var m = Matrix4x4.TRS(Position, Rotation, Vector3.one);
+        m = Matrix4x4.Inverse(m);
+        m.m20 *= -1f;
+        m.m21 *= -1f;
+        m.m22 *= -1f;
+        m.m23 *= -1f;
+        return m;
+    }
+
 }
