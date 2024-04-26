@@ -32,9 +32,12 @@ public class MVPSample : MonoBehaviour {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << groundLayer)) {
-                Vector3 worldPos = MatrixUtil.ScreenToWorldPoint(cameraModel, Input.mousePosition, new Vector2(Screen.width, Screen.height));
-                var _worldPos = hit.point;
-                GameObject obj = Instantiate(objectPrefab, _worldPos, Quaternion.identity);
+                Vector3 screenPos = Input.mousePosition;
+                float z = Vector3.Dot(hit.point - Camera.main.transform.position, Camera.main.transform.forward);
+                screenPos.z = z;
+                // Vector3 worldPos = MatrixUtil.ScreenToWorldPoint(cameraModel, screenPos, new Vector2(Screen.width, Screen.height));
+                var worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+                GameObject obj = Instantiate(objectPrefab, worldPos, Quaternion.identity);
                 GameObject panel = Instantiate(panelPrefab, Vector2.zero, Quaternion.identity, canvas.transform);
                 objects.Add(obj);
                 panels.Add(panel);
