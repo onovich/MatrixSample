@@ -1,22 +1,20 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public static class MatrixUtil {
 
     // TRS
-    public static TRSModel ApplyTRSWithOffset(in TRSModel src, in TRSModel offset) {
-        Matrix4x4 m = Matrix4x4.identity;
-        m.SetTRS(src.t, src.r, src.s);
-        TRSModel dst = new TRSModel();
-        // T
-        dst.t = m.MultiplyPoint(offset.t);
-        // R
-        dst.r = src.r * offset.r;
-        // S
-        dst.s = new Vector3(
-           src.s.x * offset.s.x,
-           src.s.y * offset.s.y,
-           src.s.z * offset.s.z
-        );
+    public static TRSModel ApplyTRSWithOffset(in TRSModel target, in TRSModel offset) {
+        Matrix4x4 m = Matrix4x4.TRS(target.t, target.r, target.s);
+        TRSModel dst = new TRSModel {
+            t = m.MultiplyPoint(offset.t),
+            r = target.r * offset.r,
+            s = new Vector3(
+                target.s.x * offset.s.x,
+                target.s.y * offset.s.y,
+                target.s.z * offset.s.z
+            )
+        };
         return dst;
     }
 
