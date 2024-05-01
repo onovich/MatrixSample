@@ -11,7 +11,10 @@ public class TRSFollowSample : MonoBehaviour {
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float rotateSpeed = 1f;
     [SerializeField] float scaleSpeed = 1f;
-    [SerializeField] float dampingFactor = 1f;
+    [SerializeField] float followDampingFactor = .25f;
+    [SerializeField] float rotationDampingFactor = .25f;
+    [SerializeField] float scaleDampingFactor = .25f;
+
     [SerializeField] Button resetButton;
     [SerializeField] Dropdown dropdown;
     #endregion
@@ -99,20 +102,20 @@ public class TRSFollowSample : MonoBehaviour {
         TRSModel childDirTRS = MatrixUtil.ApplyTRSWithOffset(in parntDirTRS, in offsetTRS);
 
         if (followType == FollowType.FollowXYZ) {
-            childObject.position = Vector3.Lerp(childObject.position, childTRS.t, dampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, dampingFactor);
-            childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, dampingFactor);
+            childObject.position = Vector3.Lerp(childObject.position, childTRS.t, followDampingFactor);
+            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, rotationDampingFactor);
+            childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, scaleDampingFactor);
         }
         if (followType == FollowType.FollowYZ) {
             var t = new Vector3(childObject.position.x, childTRS.t.y, childTRS.t.z);
-            childObject.position = Vector3.Lerp(childObject.position, t, dampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, dampingFactor);
-            childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, dampingFactor);
+            childObject.position = Vector3.Lerp(childObject.position, t, followDampingFactor);
+            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, rotationDampingFactor);
+            childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, scaleDampingFactor);
         }
         if (followType == FollowType.FollowYZAndRound) {
-            childObject.position = Vector3.Lerp(childObject.position, childDirTRS.t, dampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childDirTRS.r, dampingFactor);
-            childObject.localScale = Vector3.Lerp(childObject.localScale, childDirTRS.s, dampingFactor);
+            childObject.position = Vector3.Lerp(childObject.position, childDirTRS.t, followDampingFactor);
+            childObject.rotation = Quaternion.Lerp(childObject.rotation, childDirTRS.r, rotationDampingFactor);
+            childObject.localScale = Vector3.Lerp(childObject.localScale, childDirTRS.s, scaleDampingFactor);
         }
 
     }

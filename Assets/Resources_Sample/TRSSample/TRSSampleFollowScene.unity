@@ -295,7 +295,9 @@ MonoBehaviour:
   moveSpeed: 10
   rotateSpeed: 100
   scaleSpeed: 1
-  dampingFactor: 0.025
+  followDampingFactor: 0.01
+  rotationDampingFactor: 0.01
+  scaleDampingFactor: 0.025
   resetButton: {fileID: 1595673170}
   dropdown: {fileID: 1861937648}
 --- !u!1 &374868677
