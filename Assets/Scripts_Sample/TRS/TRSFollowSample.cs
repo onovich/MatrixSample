@@ -8,12 +8,17 @@ public class TRSFollowSample : MonoBehaviour {
     #region Serializable Fields
     [SerializeField] Transform parentObject;
     [SerializeField] Transform childObject;
+
+    [Header("Parent Config")]
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float rotateSpeed = 1f;
     [SerializeField] float scaleSpeed = 1f;
+
+    [Header("Follow Config")]
     [SerializeField] float followDampingFactor = .25f;
     [SerializeField] float rotationDampingFactor = .25f;
     [SerializeField] float scaleDampingFactor = .25f;
+    [SerializeField] float roundFactor = 1f;
 
     [SerializeField] Button resetButton;
     [SerializeField] Dropdown dropdown;
@@ -141,6 +146,7 @@ public class TRSFollowSample : MonoBehaviour {
     void ParentFace(Vector3 axis) {
         if (axis == Vector3.zero) return;
         patrentDirRot = Quaternion.LookRotation(axis);
+        patrentDirRot = Quaternion.Lerp(parentObject.rotation, patrentDirRot, roundFactor);
     }
     #endregion
 
