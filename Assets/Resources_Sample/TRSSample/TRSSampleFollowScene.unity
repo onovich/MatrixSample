@@ -295,8 +295,8 @@ MonoBehaviour:
   moveSpeed: 10
   rotateSpeed: 100
   scaleSpeed: 1
-  followDampingFactor: 0.01
-  rotationDampingFactor: 0.01
+  followDampingFactor: 0.04
+  rotationDampingFactor: 0.04
   scaleDampingFactor: 0.025
   roundFactor: 0.6
   resetButton: {fileID: 1595673170}
@@ -700,12 +700,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528624771}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 2, z: -4}
+  m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7378985437696132492}
+  m_Father: {fileID: 1647648545}
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!81 &528624773
 AudioListener:
@@ -1756,7 +1756,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 528624772}
   m_Father: {fileID: 253403804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1647648546
@@ -2387,8 +2388,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 528624772}
+  m_Children: []
   m_Father: {fileID: 253403804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

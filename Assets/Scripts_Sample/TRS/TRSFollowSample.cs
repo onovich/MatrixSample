@@ -108,18 +108,18 @@ public class TRSFollowSample : MonoBehaviour {
 
         if (followType == FollowType.FollowXYZ) {
             childObject.position = Vector3.Lerp(childObject.position, childTRS.t, followDampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, rotationDampingFactor);
+            childObject.rotation = Quaternion.Slerp(childObject.rotation, childTRS.r, rotationDampingFactor);
             childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, scaleDampingFactor);
         }
         if (followType == FollowType.FollowYZ) {
             var t = new Vector3(childObject.position.x, childTRS.t.y, childTRS.t.z);
             childObject.position = Vector3.Lerp(childObject.position, t, followDampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childTRS.r, rotationDampingFactor);
+            childObject.rotation = Quaternion.Slerp(childObject.rotation, childTRS.r, rotationDampingFactor);
             childObject.localScale = Vector3.Lerp(childObject.localScale, childTRS.s, scaleDampingFactor);
         }
         if (followType == FollowType.FollowYZAndRound) {
             childObject.position = Vector3.Lerp(childObject.position, childDirTRS.t, followDampingFactor);
-            childObject.rotation = Quaternion.Lerp(childObject.rotation, childDirTRS.r, rotationDampingFactor);
+            childObject.rotation = Quaternion.Slerp(childObject.rotation, childDirTRS.r, rotationDampingFactor);
             childObject.localScale = Vector3.Lerp(childObject.localScale, childDirTRS.s, scaleDampingFactor);
         }
 
@@ -146,7 +146,7 @@ public class TRSFollowSample : MonoBehaviour {
     void ParentFace(Vector3 axis) {
         if (axis == Vector3.zero) return;
         patrentDirRot = Quaternion.LookRotation(axis);
-        patrentDirRot = Quaternion.Lerp(parentObject.rotation, patrentDirRot, roundFactor);
+        patrentDirRot = Quaternion.Slerp(parentObject.rotation, patrentDirRot, roundFactor);
     }
     #endregion
 
